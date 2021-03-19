@@ -15,19 +15,38 @@
 // }, 1000);
 
 
+// class Persona {
+//   nombre = '';
+
+//   decirNombre() {
+//     console.log('Mi nombre es', this.nombre);
+//   }
+// }
+
+// const miPersona = new Persona();
+// miPersona.nombre = 'Leo';
+
+// const estudiante = new Persona();
+// estudiante.nombre = 'Ana';
+
+
 class Persona {
   nombre = '';
+  constructor(miNombre) {
+    this.nombre = miNombre
+  }
 
   decirNombre() {
     console.log('Mi nombre es', this.nombre);
   }
 }
 
-const miPersona = new Persona();
-miPersona.nombre = 'Leo';
+const miPersona = new Persona('Leo');
 
-const estudiante = new Persona();
-estudiante.nombre = 'Ana';
+const estudiante = new Persona('Ana');
 
 
-  imprimir (estudiante.nombre + ' no exportó la función Imprimir')
+
+  imprimir (estudiante.nombre + ' no importó la función Imprimir en el archivo "codigo calse 3.js".- 🙃')
+
+  

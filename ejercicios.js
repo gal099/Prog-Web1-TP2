@@ -54,32 +54,40 @@ console.clear();
 //     incorrecta.
 
 class User {
-  username = 'null';
+  userName = 'null';
+  constructor(name) {
+    this.userName = name;
+  }
+
   age = null;
   password = 'null';
   loggedIn = false;
+  ventas = [];
 
   login() {
     let checkPass = prompt('Ingrese su contraseña')
     if (checkPass === this.password) {
       this.loggedIn = true
     } else {
-      alert('Contraseña incorrecta')
+      imprimir('Contraseña incorrecta')
     }
     if (this.loggedIn === true) {
-      imprimir(`Usuario ${this.username} ha iniciado sesión`)
-    } 
+      imprimir(`Usuario ${this.userName} ha iniciado sesión`)
+    }
   }
 }
 
 const user01 = new User();
-user01.username = 'Juan';
+user01.userName = 'Juan';
 user01.age = 33;
-user01.password = 'asd123'
+user01.password = 'asd123';
 
 
 
-// imprimir(`Usuario ${galo.username} ha iniciado sesión`);
+// =====================================================
+// user 01.login()
+// =====================================================
+
 
 // =====================================================
 // 2. Crear la clase "Vendedor" a partir de la clase
@@ -98,6 +106,26 @@ user01.password = 'asd123'
 // Documentación recomendada:
 //   - https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/push
 
+// const vendedor = new User("Dora la vendedora")
+// vendedor.age = 44;
+// vendedor.password = 'vendo';
+
+
+class Vendedor extends User {
+  vender() {
+    if (this.loggedIn === true) {
+      let productoVendido = prompt('¿Qué vendiste?');
+      this.ventas.push(productoVendido);
+    } else {
+      this.login()
+    }
+  }
+};
+
+const user02 = new Vendedor ("Dora la vendedora");
+user02.age = 44;
+user02.password = 'vendo';
+
 // =====================================================
 // 3. Crear la clase "Comprador" a partir de la clase
 // "User".
@@ -114,6 +142,16 @@ user01.password = 'asd123'
 // Desde el metodo "comprar" se debe agregar el
 // producto vendido al vendedor, e imprimir el siguiente
 // texto de ejemplo:
+
+class Comprador extends User {
+  comprar() {
+
+  }
+};
+
+const user03 = new Comprador ("José");
+user03.age = 55;
+user03.password = 'compro';
 
 imprimir([
   'El vendedor [vendedor.username]',
