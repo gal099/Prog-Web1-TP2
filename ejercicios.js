@@ -60,13 +60,11 @@ class User {
     this.password = pass;
     this.age = age;
   }
-  age = null;
+  age = Number(null);
   mayorDeEdad = false;
   password = 'null';
   loggedIn = false;
-  ventas = [];
   
-
   login() {
     let checkPass = prompt(`${this.userName} Ingrese su contraseña`)
     if (checkPass === this.password) {
@@ -119,6 +117,7 @@ user1.password = 'asd123';
 //   - https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/push
 
 class Vendedor extends User {
+  ventas = [];
   vender() {
     if (this.loggedIn && this.mayorDeEdad) {
       let productoVendido = prompt('¿Qué vendiste?');
@@ -182,13 +181,15 @@ class Comprador extends User {
   }
 }
 
-const user3 = new Comprador("José", 'compro', 22); //paso por parámetros los valores de las propiedades
+const user3 = new Comprador('José', 'compro', 22); //paso por parámetros los valores de las propiedades del ejercicio 4
+
+//>>>>>>>>>>   parámetros del ejercicio 3   <<<<<<<<<<<<
 // user3.age = 55;
 // user3.password = 'compro';
 
 // >>>>>>>>>>>>>   Ejercicio 3 Tester   <<<<<<<<<<<<<<<<
 // =====================================================
-// user3.vender()  //quitar comentario para testear el ejercicio
+// user3.comprar()  //quitar comentario para testear el ejercicio
 // =====================================================
 
 // =====================================================
