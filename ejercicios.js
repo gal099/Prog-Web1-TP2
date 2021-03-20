@@ -55,37 +55,49 @@ console.clear();
 
 class User {
   userName = 'null';
-  constructor(name) {
+  constructor(name, pass, age) {
     this.userName = name;
+    this.password = pass;
+    this.age = age;
   }
-
   age = null;
+  mayorDeEdad = false;
   password = 'null';
   loggedIn = false;
   ventas = [];
+  
 
   login() {
-    let checkPass = prompt('Ingrese su contraseña')
+    let checkPass = prompt(`${this.userName} Ingrese su contraseña`)
     if (checkPass === this.password) {
       this.loggedIn = true
+      imprimir(`Usuario [${this.userName}] ha iniciado sesión`)
     } else {
       imprimir('Contraseña incorrecta')
     }
-    if (this.loggedIn === true) {
-      imprimir(`Usuario ${this.userName} ha iniciado sesión`)
+  }
+
+  esMayor() {
+    if (this.age >= 18) {
+      this.mayorDeEdad = true;
+      // imprimir (this.mayorDeEdad)
+    } else {
+      // imprimir (this.mayorDeEdad);
+      imprimir('Debes ser mayor de edad');
     }
+    return this.mayorDeEdad;
   }
 }
 
-const user01 = new User();
-user01.userName = 'Juan';
-user01.age = 33;
-user01.password = 'asd123';
+const user1 = new User();
+user1.userName = 'Juan';
+user1.age = 11;
+user1.password = 'asd123';
 
 
-
+// >>>>>>>>>>>>>   Ejercicio 1 Tester   <<<<<<<<<<<<<<<<
 // =====================================================
-// user 01.login()
+// user1.login()  //quitar comentario para testear el ejercicio
 // =====================================================
 
 
@@ -106,25 +118,29 @@ user01.password = 'asd123';
 // Documentación recomendada:
 //   - https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/push
 
-// const vendedor = new User("Dora la vendedora")
-// vendedor.age = 44;
-// vendedor.password = 'vendo';
-
-
 class Vendedor extends User {
   vender() {
-    if (this.loggedIn === true) {
+    if (this.loggedIn && this.mayorDeEdad) {
       let productoVendido = prompt('¿Qué vendiste?');
       this.ventas.push(productoVendido);
     } else {
-      this.login()
+      this.esMayor();
+      if (this.mayorDeEdad) {
+        this.login();
+        this.vender();
+      }
     }
   }
-};
+}
 
-const user02 = new Vendedor ("Dora la vendedora");
-user02.age = 44;
-user02.password = 'vendo';
+const user2 = new Vendedor("Dora la vendedora");
+user2.age = 44;
+user2.password = 'vendo';
+
+// >>>>>>>>>>>>>   Ejercicio 2 Tester   <<<<<<<<<<<<<<<<
+// =====================================================
+// user2.vender()  //quitar comentario para testear el ejercicio
+// =====================================================
 
 // =====================================================
 // 3. Crear la clase "Comprador" a partir de la clase
@@ -142,22 +158,38 @@ user02.password = 'vendo';
 // Desde el metodo "comprar" se debe agregar el
 // producto vendido al vendedor, e imprimir el siguiente
 // texto de ejemplo:
+// imprimir([
+//   'El vendedor [vendedor.username]',
+//   ' ha vendido [descripción producto]',
+//   ' a [comprador.username]',
+// ]);
+
 
 class Comprador extends User {
   comprar() {
-
+    if (this.loggedIn && this.mayorDeEdad) {
+      let productoComprado = prompt('¿Qué compraste?');
+      user2.ventas.push(productoComprado);
+      imprimir(`El vendedor [${user2.userName}] ha a vendido [${productoComprado}] a [${this.userName}]`)
+    }
+    else {
+      this.esMayor();
+      if (this.mayorDeEdad) {
+        this.login();
+        this.comprar();
+      }
+    }
   }
-};
+}
 
-const user03 = new Comprador ("José");
-user03.age = 55;
-user03.password = 'compro';
+const user3 = new Comprador("José", 'compro', 22); //paso por parámetros los valores de las propiedades
+// user3.age = 55;
+// user3.password = 'compro';
 
-imprimir([
-  'El vendedor [vendedor.username]',
-  ' ha vendido [descripción producto]',
-  ' a [comprador.username]',
-]);
+// >>>>>>>>>>>>>   Ejercicio 3 Tester   <<<<<<<<<<<<<<<<
+// =====================================================
+// user3.vender()  //quitar comentario para testear el ejercicio
+// =====================================================
 
 // =====================================================
 // 4. Modificar las clases anteriores y agregar un
@@ -165,10 +197,29 @@ imprimir([
 // los valores de las propiedades "username",
 // "password" y "age".
 
+// >>>>>>>>>>>>>   Desarrollo Ejercicio 4   <<<<<<<<<<<<<<<<
+// El código es agregado a la clase padre "User".-
+// En el ejercicio 3 paso por parámetros los valores de las propiedades agregadas.-
+// =====================================================
+// constructor(name, pass, age) {
+//   this.userName = name;
+//   this.password = pass;
+//   this.age = age;
+// }
+// =====================================================
+
+
 // =====================================================
 // 5. Modificar las clases anteriores y agregar un
 // método "esMayor()" que devuelva `true` si el usuario
 // es mayor de edad (`age >= 18`).
+
+// >>>>>>>>>>>>>   Ejercicio 5 Tester   <<<<<<<<<<<<<<<<
+// =====================================================
+// user1.esMayor()  //quitar comentario para testear el ejercicio
+// user2.esMayor()  //quitar comentario para testear el ejercicio
+// =====================================================
+
 
 // =====================================================
 // 6. Modificar las clases anteriores, de forma tal que
@@ -177,3 +228,12 @@ imprimir([
 // para hacer "login()". Si no es mayor de edad, debe
 // mostrar un mensaje "Debes ser mayor de edad" e
 // impedir el "login()" definido en "User".
+
+const user4 = new Comprador('soyMenor', 'asdasd', 15);
+
+// >>>>>>>>>>>>>   Ejercicio 6 Tester   <<<<<<<<<<<<<<<<
+// =====================================================
+// user2.vender()  //quitar comentario para testear el ejercicio
+// user3.comprar() //quitar comentario para testear el ejercicio
+// user4.comprar() //quitar comentario para testear el ejercicio
+// // =====================================================
